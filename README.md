@@ -10,6 +10,10 @@ $ command -v nvm
 $ nvm install lts/erbium
 $ which node
 $ npm install -g yarn
+$ brew update
+$ brew install mongodb
+$ mkdir -p $HOME/data/db
+$ nohup mongod --dbpath $HOME/data/db &>/dev/null &
 ```
 
 ## Installation
