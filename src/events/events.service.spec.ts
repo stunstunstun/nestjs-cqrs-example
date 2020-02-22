@@ -1,4 +1,5 @@
 import { Test } from '@nestjs/testing'
+import { INestApplication } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 import { EventsService } from './events.service'
 import { CreateEventDto } from './dto/create-event.dto'
@@ -6,7 +7,7 @@ import { EventSchema } from './schemas/event.schema'
 import { reviewAddedEvent } from '__tests__/fixtures/event.fixture'
 
 describe('events.service', () => {
-  let app
+  let app: INestApplication
   let eventsService: EventsService
 
   beforeAll(async () => {
@@ -38,7 +39,5 @@ describe('events.service', () => {
     );
   })
 
-  afterEach(async () => {
-    await app.close();
-  })
+  afterEach(async () => app.close())
 })
