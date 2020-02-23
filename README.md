@@ -44,3 +44,10 @@ $ yarn start
 # production mode
 $ yarn serve
 ```
+
+```bash
+$ curl -i --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"type":"REVIEW","action":"ADD","userId":"3ede0ef2-92b7-4817-a5f3-0c575361f745","placeId": "2e4baf1c-5acb-4efb-a1af-eddada31b00f"}' \
+  http://localhost:3000/events
+```
