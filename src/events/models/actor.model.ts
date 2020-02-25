@@ -1,9 +1,7 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { EventAction } from 'src/events/events.enum';
-import { ReviewAddedEvent } from 'src/events/handlers/review-added.event'
-import { ReviewPlaceEvent } from 'src/events/handlers/review-place.event';
-import { ReviewModifiedEvent } from 'src/events/handlers/review-modified.event';
-import { ReviewDeletedEvent } from 'src/events/handlers/review-deleted.event';
+import { ReviewAddedEvent, ReviewPlaceEvent, ReviewModifiedEvent, ReviewDeletedEvent } from 'src/reviews/events';
+import { IncreasedPointEvent, DecreasedPointEvent } from 'src/mileages/events';
 
 export class Actor extends AggregateRoot {
   constructor(private readonly userId: string) {
@@ -20,7 +18,19 @@ export class Actor extends AggregateRoot {
       case EventAction.DELETE:
         return this.apply(new ReviewDeletedEvent(this.userId, data));
       default:
-        throw new Error(`this ${action} action does not exists`)
+        throw new Error(`this ${action} action does not exists`);
+    }
+  }
+
+  grantPoint(action: string, data: any) {
+    const { amount } = data;
+    switch (action) {
+      case EventAction.INCREASE:
+        return this.apply(new IncreasedPointEvent(this.userId, amount));
+      case EventAction.DESCREASE:
+        return this.apply(new DecreasedPointEvent(this.userId, amount));
+      default:
+        throw new Error(`this ${action} action does not exists`);
     }
   }
 }

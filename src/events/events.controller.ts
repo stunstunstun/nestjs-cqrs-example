@@ -11,7 +11,7 @@ export class EventsController {
     @Body() dto: CreateEventDto,
     @Response() res,
   ) {
-    await this.eventsService.create(dto)
+    await this.eventsService.createEvent(dto)
     return res.status(HttpStatus.NO_CONTENT).send()
   }
 }

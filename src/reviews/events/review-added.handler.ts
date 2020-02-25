@@ -9,5 +9,6 @@ export class ReviewAddedHandler implements IEventHandler<ReviewAddedEvent> {
 
     const point = makeCalculationPoint(data);
     console.log(userId, point);
+    // TODO: grantPoint
   }
 }

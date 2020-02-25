@@ -1,15 +1,17 @@
 # Mileages
 
-Express event sourcing through the mileage system :rocket:
+Do event sourcing practices through the mileages system :rocket:
 
 ## Prerequisites
 
 ```bash
+# Install Node.js runtime environments
 $ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
 $ command -v nvm
 $ nvm install lts/erbium
 $ which node
 $ npm install -g yarn
+# Install MongoDB locally and run as background
 $ brew update
 $ brew install mongodb
 $ mkdir -p $HOME/data/db
