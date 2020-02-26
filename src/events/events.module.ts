@@ -4,8 +4,6 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { EventSchema } from './schemas/event.schema';
 import { EventsController } from './events.controller';
 import { EventsService } from './events.service';
-import { ReviewEventHandlers } from 'src/reviews/events';
-import { MileageEventHandlers } from 'src/mileages/events';
 
 @Module({
   imports: [
@@ -14,8 +12,6 @@ import { MileageEventHandlers } from 'src/mileages/events';
   ],
   controllers: [EventsController],
   providers: [
-    ...ReviewEventHandlers,
-    ...MileageEventHandlers,
     EventsService,
   ],
   exports: [

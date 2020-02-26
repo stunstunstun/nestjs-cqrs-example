@@ -10,8 +10,8 @@ import { EventType } from 'src/events/events.enum';
 @Injectable()
 export class MileagesService {
   constructor(
-    @InjectModel('Mileage') private readonly mileageModel: Model<Mileage>,
     private readonly eventsService: EventsService,
+    @InjectModel('Mileage') private readonly mileageModel: Model<Mileage>,
   ) {}
 
   async grantPoint(userId: string, point: GrantPointDto) {

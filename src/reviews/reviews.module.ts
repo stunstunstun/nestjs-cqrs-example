@@ -1,4 +1,9 @@
 import { Module } from '@nestjs/common';
+import { ReviewEventHandlers } from './events';
 
-@Module({})
+@Module({
+  providers: [
+    ...ReviewEventHandlers,
+  ],
+})
 export class ReviewsModule {}

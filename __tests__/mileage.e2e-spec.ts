@@ -28,5 +28,18 @@ describe('Mileage resources', () => {
       .expect(200);
   });
 
+  it('GET /mileage/:userId', async () => {
+    const { body } = await request(app.getHttpServer())
+      .get(`/mileages/${reviewAddedEvent.userId}`)
+      .expect(200);
+
+    expect(body).toEqual(
+      expect.objectContaining({
+        userId: reviewAddedEvent.userId,
+        amount: expect.any(Number),
+      })
+    );
+  });
+
   afterAll(async () => app.close());
 });
