@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common'
-import { CqrsModule } from '@nestjs/cqrs'
-import { ReviewEventHandlers } from 'src/reviews/events'
+import { Module } from '@nestjs/common';
+import { CqrsModule } from '@nestjs/cqrs';
+import { ReviewEventHandlers } from 'src/reviews/events';
 
 @Module({
   imports: [

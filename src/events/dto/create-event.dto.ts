@@ -1,6 +1,6 @@
 export class CreateEventDto {
   constructor(props) {
-    Object.assign(this, props)
+    Object.assign(this, props);
   }
 
   readonly type: string;

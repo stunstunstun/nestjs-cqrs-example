@@ -18,11 +18,11 @@ const MileageSchema = new mongoose.Schema({
 });
 
 MileageSchema.pre('findOneAndUpdate', function hook() {
-  this.update({}, { $set: { updated: new Date() } })
-})
+  this.update({}, { $set: { updated: new Date() } });
+});
 
 MileageSchema.index({ userId: 1, created: -1 });
 
 export {
   MileageSchema,
-}
+};

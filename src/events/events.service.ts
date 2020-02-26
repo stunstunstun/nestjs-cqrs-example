@@ -1,6 +1,6 @@
 import { Model } from 'mongoose';
 import { InjectModel } from "@nestjs/mongoose";
-import { EventPublisher } from '@nestjs/cqrs'
+import { EventPublisher } from '@nestjs/cqrs';
 import { Event } from './interfaces/event.interface';
 import { CreateEventDto } from './dto/create-event.dto';
 import { EventType } from './events.enum';
@@ -16,7 +16,7 @@ export class EventsService {
 
   async createEvent(createEventDto: CreateEventDto): Promise<Event> {
     // handle events
-    const { type, action, userId, placeId, data } = createEventDto
+    const { type, action, userId, placeId, data } = createEventDto;
     const actor = this.publisher.mergeObjectContext(new Actor(userId));
     switch(type) {
       case EventType.REVIEW:

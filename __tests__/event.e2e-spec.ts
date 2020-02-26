@@ -25,5 +25,5 @@ describe('Event resources', () => {
       .expect(204);
   });
 
-  afterEach(async () => app.close())
+  afterEach(async () => app.close());
 });

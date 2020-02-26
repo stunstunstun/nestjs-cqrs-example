@@ -1,5 +1,5 @@
 import { Controller, Post, Body, Response, HttpStatus, Param } from '@nestjs/common';
-import { MileagesService } from './mileages.service'
+import { MileagesService } from './mileages.service';
 import { GrantPointDto } from './dto/grant-point.dto';
 
 @Controller('mileages')
@@ -14,6 +14,6 @@ export class MileagesController {
   ) {
     return res.status(HttpStatus.OK).json(
       await this.mileagesService.grantPoint(userId, dto)
-    )
+    );
   }
 }

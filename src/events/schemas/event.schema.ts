@@ -23,4 +23,4 @@ EventSchema.index({ userId: 1, created: -1 });
 
 export {
   EventSchema,
-}
+};

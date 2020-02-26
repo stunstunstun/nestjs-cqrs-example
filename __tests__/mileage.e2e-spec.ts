@@ -28,5 +28,5 @@ describe('Mileage resources', () => {
       .expect(200);
   });
 
-  afterEach(async () => app.close())
+  afterEach(async () => app.close());
 });

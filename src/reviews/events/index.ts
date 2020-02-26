@@ -1,5 +1,5 @@
 import { ReviewAddedEvent } from './review-added.event';
-import { ReviewPlaceEvent } from './review-place.event'
+import { ReviewPlaceEvent } from './review-place.event';
 import { ReviewDeletedEvent } from './review-deleted.event';
 import { ReviewModifiedEvent } from './review-modified.event';
 import { ReviewAddedHandler } from './review-added.handler';
@@ -16,4 +16,4 @@ export {
   ReviewDeletedEvent,
   ReviewModifiedEvent,
   ReviewEventHandlers,
-}
+};

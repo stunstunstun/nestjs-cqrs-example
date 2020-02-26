@@ -1,5 +1,5 @@
 import { Controller, Post, Body, Response, HttpStatus } from '@nestjs/common';
-import { EventsService } from './events.service'
+import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 
 @Controller('events')
@@ -11,7 +11,7 @@ export class EventsController {
     @Body() dto: CreateEventDto,
     @Response() res,
   ) {
-    await this.eventsService.createEvent(dto)
-    return res.status(HttpStatus.NO_CONTENT).send()
+    await this.eventsService.createEvent(dto);
+    return res.status(HttpStatus.NO_CONTENT).send();
   }
 }
