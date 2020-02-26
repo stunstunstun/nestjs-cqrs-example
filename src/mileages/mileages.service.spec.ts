@@ -25,7 +25,10 @@ describe('events.service', () => {
   });
 
   test('get a user mileages', async () => {
-    const event = await mileagesService.grantPoint(reviewAddedEvent.userId, new GrantPointDto({ grantType: GrantType.INCREASE, amount: 1 }));
+    const event = await mileagesService.grantPoint(
+      reviewAddedEvent.userId,
+      new GrantPointDto({ grantType: GrantType.INCREASE, amount: 1 }),
+    );
     expect(event).toEqual(
       expect.objectContaining({
         type: EventType.POINT,
@@ -33,14 +36,29 @@ describe('events.service', () => {
       })
     );
     
-    const mileage = await mileagesService.getMileages(reviewAddedEvent.userId);
-
-    expect(mileage).toEqual(
+    const mileages = await mileagesService.getMileages(reviewAddedEvent.userId);
+    expect(mileages).toEqual(
       expect.objectContaining({
         userId: reviewAddedEvent.userId,
         amount: expect.any(Number),
       })
     );
+  });
+
+  test('update a user mileages', async () => {
+    const mileages = await mileagesService.getMileages(reviewAddedEvent.userId);
+    
+    await mileagesService.grantPoint(
+      reviewAddedEvent.userId,
+      new GrantPointDto({ grantType: GrantType.INCREASE, amount: 1 }),
+    );
+    await mileagesService.grantPoint(
+      reviewAddedEvent.userId,
+      new GrantPointDto({ grantType: GrantType.DECREASE, amount: 1 }),
+    );
+
+    const current = await mileagesService.getMileages(reviewAddedEvent.userId);
+    expect(mileages.amount).toEqual(current.amount);
   });
 
   afterAll(async () => app.close());
