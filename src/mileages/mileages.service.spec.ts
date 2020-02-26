@@ -43,5 +43,5 @@ describe('events.service', () => {
     );
   });
 
-  afterEach(async () => app.close());
+  afterAll(async () => app.close());
 });

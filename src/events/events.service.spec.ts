@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import { MongoDBModule } from 'src/mongodb.module';
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
-import { reviewAddedEvent } from '__tests__/fixtures/event.fixture';
+import { reviewAddedEvent, increasedPointEvent } from '__tests__/fixtures/event.fixture';
 import { EventsModule } from './events.module';
 
 describe('events.service', () => {
@@ -34,5 +34,12 @@ describe('events.service', () => {
     );
   });
 
-  afterEach(async () => app.close());
+  test('create a event that point type', async () => {
+    const event = await eventsService.createEvent(new CreateEventDto(increasedPointEvent));
+    expect(event).toEqual(
+      expect.objectContaining(increasedPointEvent)
+    );
+  });
+
+  afterAll(async () => app.close());
 });

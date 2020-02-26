@@ -18,12 +18,12 @@ describe('Event resources', () => {
     await app.init();
   });
 
-  it('POST /events', () => {
+  test('POST /events', () => {
     return request(app.getHttpServer())
       .post('/events')
       .send(reviewAddedEvent)
       .expect(204);
   });
 
-  afterEach(async () => app.close());
+  afterAll(async () => app.close());
 });

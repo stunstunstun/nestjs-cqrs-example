@@ -3,9 +3,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { CqrsModule } from '@nestjs/cqrs';
 import { EventSchema } from './schemas/event.schema';
 import { EventsController } from './events.controller';
+import { EventsService } from './events.service';
 import { ReviewEventHandlers } from 'src/reviews/events';
 import { MileageEventHandlers } from 'src/mileages/events';
-import { EventsService } from './events.service';
 
 @Module({
   imports: [
@@ -18,6 +18,8 @@ import { EventsService } from './events.service';
     ...MileageEventHandlers,
     EventsService,
   ],
-  exports: [EventsService],
+  exports: [
+    EventsService,
+  ],
 })
 export class EventsModule {}
