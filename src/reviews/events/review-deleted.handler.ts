@@ -5,6 +5,7 @@ import { ReviewDeletedEvent } from './review-deleted.event';
 export class ReviewDeletedHandler implements IEventHandler<ReviewDeletedEvent> {
   async handle(event: ReviewDeletedEvent) {
     console.log(event);
-    // TODO: grantPoint
+    // TODO: calculate points to recall
+    // TODO: grant point as trigging POINT event
   }
 }
