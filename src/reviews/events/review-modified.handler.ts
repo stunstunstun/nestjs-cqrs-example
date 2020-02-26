@@ -5,6 +5,7 @@ import { ReviewModifiedEvent } from './review-modified.event';
 export class ReviewModifiedHandler implements IEventHandler<ReviewModifiedEvent> {
   async handle(event: ReviewModifiedEvent) {
     console.log(event);
-    // TODO: grantPoint
+    // TODO: check previous review content
+    // TODO: grant point as trigging POINT event
   }
 }
