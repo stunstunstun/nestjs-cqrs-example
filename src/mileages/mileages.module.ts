@@ -1,7 +1,7 @@
 import { Module, forwardRef } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MileageSchema } from './schemas/mileage.schema';
-import { MileagesController } from './Mileages.controller';
+import { MileagesController } from './mileages.controller';
 import { EventsModule } from 'src/events/events.module';
 import { MileagesService } from './mileages.service';
 
