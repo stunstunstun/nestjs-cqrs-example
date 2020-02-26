@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Body, Response, HttpStatus, Param } from '@nestjs/common';
+import { Controller, Post, Get, Body, Response, HttpStatus, Param, HttpException } from '@nestjs/common';
 import { MileagesService } from './mileages.service';
 import { GrantPointDto } from './dto/grant-point.dto';
 
@@ -12,9 +12,9 @@ export class MileagesController {
     @Body() dto: GrantPointDto,
     @Response() res,
   ) {
-    return res.status(HttpStatus.OK).json(
-      await this.mileagesService.grantPoint(userId, dto)
-    );
+    // TODO: Use decorator to separate authentication
+    await this.mileagesService.grantPoint(userId, dto);
+    return res.status(HttpStatus.NO_CONTENT).send();
   }
 
   @Get(':userId')
@@ -22,8 +22,11 @@ export class MileagesController {
     @Param('userId') userId,
     @Response() res,
   ) {
-    return res.status(HttpStatus.OK).json(
-      await this.mileagesService.getMileages(userId)
-    );
+    // TODO: return 401 when authentication is added
+    const mileages = await this.mileagesService.getMileages(userId);
+    if (!mileages) {
+      throw new HttpException('Not found a user', HttpStatus.NOT_FOUND);
+    }
+    return res.status(HttpStatus.OK).json(mileages);
   }
 }

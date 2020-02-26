@@ -10,4 +10,13 @@ module.exports = {
   transform: {
     '^.+\\.ts$': 'ts-jest',
   },
-}
+  globalSetup: '<rootDir>/__tests__/e2e.setup.ts',
+  globalTeardown: '<rootDir>/__tests__/e2e.teardown.ts',
+  globals: {
+    'ts-jest': {
+      diagnostics: {
+        ignoreCodes: [2339]
+      }
+    }
+  }
+};
