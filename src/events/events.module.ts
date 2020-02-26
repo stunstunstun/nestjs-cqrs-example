@@ -1,17 +1,24 @@
-import { Module } from '@nestjs/common'
-import { MongooseModule } from '@nestjs/mongoose'
-import { EventSchema } from './schemas/event.schema'
-import { EventsController } from './events.controller'
-import { EventsService } from './events.service'
+import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { CqrsModule } from '@nestjs/cqrs';
+import { EventSchema } from './schemas/event.schema';
+import { EventsController } from './events.controller';
+import { EventsService } from './events.service';
+import { ReviewEventHandlers } from 'src/reviews/events';
+import { MileageEventHandlers } from 'src/mileages/events';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'Event', schema: EventSchema }])
+    MongooseModule.forFeature([{ name: 'Event', schema: EventSchema }]),
+    CqrsModule,
   ],
-  controllers: [
-    EventsController,
-  ],
+  controllers: [EventsController],
   providers: [
+    ...ReviewEventHandlers,
+    ...MileageEventHandlers,
+    EventsService,
+  ],
+  exports: [
     EventsService,
   ],
 })

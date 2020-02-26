@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { EventsModule } from 'src/events/events.module'
+import { MongoDBModule } from './mongodb.module';
+import { EventsModule } from './events/events.module';
+import { MileagesModule } from './mileages/mileages.module';
+import { ReviewsModule } from './reviews/reviews.module';
 
 @Module({
-  // TODO: Configure environments values with dotenv
   imports: [
-    MongooseModule.forRoot('mongodb://127.0.0.1:27017/mileages'),
+    MongoDBModule,
     EventsModule,
+    MileagesModule,
+    ReviewsModule,
   ],
 })
 export class AppModule {}

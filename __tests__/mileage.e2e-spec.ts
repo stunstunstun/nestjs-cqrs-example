@@ -4,7 +4,7 @@ import * as request from 'supertest';
 import { reviewAddedEvent } from './fixtures/event.fixture';
 import { AppModule } from '../src/app.module';
 
-describe('Event resources', () => {
+describe('Mileage resources', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -18,12 +18,15 @@ describe('Event resources', () => {
     await app.init();
   });
 
-  it('POST /events', () => {
+  it('POST /mileage/:userId', () => {
     return request(app.getHttpServer())
-      .post('/events')
-      .send(reviewAddedEvent)
-      .expect(204);
+      .post(`/mileages/${reviewAddedEvent.userId}`)
+      .send({
+        grantType: 'INCREASE',
+        amount: 1.0,
+      })
+      .expect(200);
   });
 
-  afterEach(async () => app.close())
+  afterAll(async () => app.close());
 });

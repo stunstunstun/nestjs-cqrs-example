@@ -18,9 +18,9 @@ const EventSchema = new mongoose.Schema({
   },
 });
 
-EventSchema.index({ type: 1, action: 1, created: -1 });
+EventSchema.index({ type: 1, action: 1, placeId: 1, created: -1 });
 EventSchema.index({ userId: 1, created: -1 });
 
 export {
   EventSchema,
-}
+};
