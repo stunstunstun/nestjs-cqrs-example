@@ -5,9 +5,11 @@ import { EventSchema } from './schemas/event.schema';
 import { EventsController } from './events.controller';
 import { EventsService } from './events.service';
 
+const Event = MongooseModule.forFeature([{ name: 'Event', schema: EventSchema }]);
+
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'Event', schema: EventSchema }]),
+    Event,
     CqrsModule,
   ],
   controllers: [EventsController],
@@ -15,6 +17,7 @@ import { EventsService } from './events.service';
     EventsService,
   ],
   exports: [
+    Event,
     EventsService,
   ],
 })
