@@ -1,13 +1,16 @@
 import { Model } from 'mongoose';
 import { IEventHandler, EventsHandler } from '@nestjs/cqrs';
-import { IncreasedPointEvent } from './increased-point.event';
 import { InjectModel } from '@nestjs/mongoose';
-import { Mileage } from '../interfaces/mileage.interface';
+import { Mileage } from 'src/mileages/interfaces/mileage.interface';
+import { Event } from 'src/events/interfaces/event.interface';
+import { IncreasedPointEvent } from './increased-point.event';
+import { EventType, EventAction } from 'src/events/events.enum';
 
 @EventsHandler(IncreasedPointEvent)
 export class IncreasedPointHandler implements IEventHandler<IncreasedPointEvent> {
   constructor(
     @InjectModel('Mileage') private readonly mileageModel: Model<Mileage>,
+    @InjectModel('Event') private readonly eventModel: Model<Event>,
   ) {}
 
   async handle(event: IncreasedPointEvent) {
@@ -17,12 +20,18 @@ export class IncreasedPointHandler implements IEventHandler<IncreasedPointEvent>
       throw new Error('User mileages document does not exits');
     }
 
-    return await this.mileageModel.findOneAndUpdate({
+    await this.mileageModel.findOneAndUpdate({
       userId,
     }, {
       $inc: { amount },
     }, {
       new: true,
+    });
+
+    return this.eventModel.create({
+      type: EventType.POINT,
+      action: EventAction.ADD,
+      ...event
     });
   }
 }

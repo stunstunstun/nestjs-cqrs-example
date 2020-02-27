@@ -16,13 +16,7 @@ export class MileagesService {
 
   async grantPoint(userId: string, point: GrantPointDto) {
     const { grantType, amount } = point;
-    // create document when does not exists
-    const mileage = await this.getMileages(userId);
-    if (!mileage) {
-      const item = new this.mileageModel({ userId, amount: 0 });
-      await item.save();
-    }
-    // create a history
+    // create a history and invoke a event
     return await this.eventsService.createEvent(new CreateEventDto({
       type: EventType.POINT,
       action: grantType,

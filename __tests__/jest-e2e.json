@@ -7,5 +7,14 @@
   "testRegex": ".e2e-spec.ts$",
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "globalSetup": "<rootDir>/e2e.setup.ts",
+  "globalTeardown": "<rootDir>/e2e.teardown.ts",
+  "globals": {
+    "ts-jest": {
+      "diagnostics": {
+        "ignoreCodes": [2339]
+      }
+    }
   }
 }
