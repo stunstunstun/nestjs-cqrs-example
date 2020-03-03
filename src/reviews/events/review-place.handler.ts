@@ -6,6 +6,7 @@ import { GrantType } from 'src/mileages/mileages.enum';
 import { InjectModel } from '@nestjs/mongoose';
 import { EventType, EventAction } from 'src/events/events.enum';
 
+const OCCUPIED_ACTIONS = Object.freeze([EventAction.ADD, EventAction.MOD]);
 const FIRST_PLACE_REVIEWED_POINT = 1;
 
 @EventsHandler(ReviewPlaceEvent)
@@ -19,10 +20,10 @@ export class ReviewPlaceHandler implements IEventHandler<ReviewPlaceEvent> {
     const { userId, placeId } = event;
     // check if a review is already in place
     const [review] = await this.eventModel
-      .find({ type: EventType.REVIEW, action: EventAction.ADD, placeId })
+      .find({ type: EventType.REVIEW, placeId })
       .sort({ created: -1 })
       .limit(1);
-    if (review && [EventAction.ADD, EventAction.MOD].includes(review.action) ) {
+    if (review && OCCUPIED_ACTIONS.includes(review.action) ) {
       return;
     }
     // grant point as trigging POINT event
